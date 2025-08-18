@@ -2,7 +2,7 @@ import { getDB } from "../config/db.js";
 import { validationResult } from "express-validator";
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
-import { Usuario } from "../models/Usuario.js";
+import Usuario from "../models/Usuario.js";
 import { ObjectId } from "mongodb";
 
 // -------------------- REGISTRO --------------------

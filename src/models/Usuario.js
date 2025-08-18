@@ -1,6 +1,6 @@
 import bcrypt from "bcryptjs";
 
-export class Usuario {
+export default class Usuario {
   constructor({ nombre, email, password }) {
     this.nombre = nombre;
     this.email = email;

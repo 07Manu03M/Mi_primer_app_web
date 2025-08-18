@@ -3,6 +3,7 @@ import dotenv from "dotenv";
 import cors from "cors";
 import { connect } from "./src/config/db.js";
 import usuarioRoutes from "./src/routes/usuarioRoutes.js";
+import tareaRoutes from "./src/routes/tareaRoutes.js"; // ← Importamos las rutas de Tarea
 import { errorHandler } from "./src/middlewares/errorHandler.js";
 
 dotenv.config();
@@ -15,6 +16,7 @@ app.use(express.json());
 
 // Rutas
 app.use("/api/usuarios", usuarioRoutes);
+app.use("/api/tareas", tareaRoutes);
 
 // Manejo de errores global
 app.use(errorHandler);
