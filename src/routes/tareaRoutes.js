@@ -5,6 +5,7 @@ import {
   obtenerTareas,
   cambiarEstado,
   eliminarTarea,
+  filtrarTareas
 } from "../controller/tareaController.js";
 import { auth } from "../middlewares/auth.js";
 
@@ -40,5 +41,7 @@ router.patch(
 
 // Eliminar tarea
 router.delete("/:id", auth, eliminarTarea);
+
+router.get("/:usuarioId/filtrar", auth, filtrarTareas);
 
 export default router;

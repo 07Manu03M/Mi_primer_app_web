@@ -3,7 +3,7 @@ import dotenv from "dotenv";
 import cors from "cors";
 import { connect } from "./src/config/db.js";
 import usuarioRoutes from "./src/routes/usuarioRoutes.js";
-import tareaRoutes from "./src/routes/tareaRoutes.js"; // ← Importamos las rutas de Tarea
+import tareaRoutes from "./src/routes/tareaRoutes.js";
 import { errorHandler } from "./src/middlewares/errorHandler.js";
 import grupoRoutes from "./src/routes/grupoRoutes.js";
 

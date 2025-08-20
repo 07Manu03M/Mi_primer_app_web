@@ -9,7 +9,7 @@ export const crearTarea = async (req, res, next) => {
     const { titulo, descripcion, fechaLimite, responsable } = req.body;
     const usuarioId = req.usuario.id;
 
-    const db = getDB(); // <<--- aquí inicializamos la conexión
+    const db = getDB();
 
     const usuarioResponsable = await db
       .collection("usuarios")
@@ -19,7 +19,8 @@ export const crearTarea = async (req, res, next) => {
       return res.status(404).json({ message: "Responsable no encontrado" });
     }
 
-    const nuevaTarea = {
+    // Instanciar usando el modelo Tarea
+    const nuevaTarea = new Tarea({
       titulo,
       descripcion,
       fechaLimite,
@@ -27,9 +28,8 @@ export const crearTarea = async (req, res, next) => {
         id: usuarioResponsable._id,
         nombre: usuarioResponsable.nombre,
       },
-      creadoPor: new ObjectId(usuarioId),
-      creadoEn: new Date(),
-    };
+      usuarioId
+    });
 
     await db.collection("tareas").insertOne(nuevaTarea);
 
@@ -38,6 +38,7 @@ export const crearTarea = async (req, res, next) => {
     next(error);
   }
 };
+
 
 
 export const obtenerTareas = async (req, res, next) => {
@@ -104,6 +105,31 @@ export const eliminarTarea = async (req, res, next) => {
     }
 
     res.json({ msg: "Tarea eliminada correctamente" });
+  } catch (err) {
+    next(err);
+  }
+};
+
+// Filtrar tareas por estado
+export const filtrarTareas = async (req, res, next) => {
+  try {
+    const { usuarioId } = req.params;
+    const { estado } = req.query;
+
+    const estadosPermitidos = ["pendiente", "en progreso", "completada"];
+    if (estado && !estadosPermitidos.includes(estado)) {
+      return res.status(400).json({ msg: "Estado no válido" });
+    }
+
+    const db = getDB();
+
+    // Construir query dinámico
+    const filtro = { "responsable.id": new ObjectId(usuarioId) };
+    if (estado) filtro.estado = estado;
+
+    const tareas = await db.collection("tareas").find(filtro).toArray();
+
+    res.json(tareas);
   } catch (err) {
     next(err);
   }
