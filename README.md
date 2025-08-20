@@ -135,3 +135,9 @@ Todos los endpoints tienen la base `/api`. Si el backend se ejecuta en local, la
     👉 [**Mi\_primer\_app\_web-frontend**](https://github.com/07Manu03M/Mi_primer_app_web-frontend)
   * **Video Explicativo**:
     🎥 [**Enlace al video explicativo del proyecto**](https://drive.google.com/drive/folders/1SHKMJ27ou9TPC_RzxuMBIT-NijVMIC4M?usp=sharing)
+
+
+    ## Integrante
+    - Karina Sanabria Casas
+    - Manuel Larrotta Meneses
+    - Uriel Vargas
